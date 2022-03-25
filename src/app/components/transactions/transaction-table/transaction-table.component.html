@@ -1,0 +1,46 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <!--    ** Ran out of time to be able to implement ngClasses for below notifications -->
+    <!--    <div class="alert alert-success" role="alert">Transaction added!</div>-->
+    <!--    <div class="alert alert-primary" role="alert">Transaction updated!</div>-->
+    <!--    <div class="alert alert-danger" role="alert">Transaction deleted!</div>-->
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Type</th>
+          <th scope="col">Security</th>
+          <th scope="col" class="text-right">Shares</th>
+          <th scope="col" class="text-right">Value</th>
+          <th scope="col" class="text-right">Cashflow</th>
+          <th scope="col" class="text-right">&nbsp;</th>
+          <th scope="col" class="text-right">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of transactions; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ data.date | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ data.type | titlecase }}</td>
+          <td>{{ data.security }}</td>
+          <td class="text-right">{{ data.shares }}</td>
+          <td class="text-right">{{ data.value | currency: 'GBP' }}</td>
+          <td class="text-right">{{ data.cashflow }}</td>
+
+          <td class="text-right"></td>
+          <td class="text-right" (click)="editTransaction(data)"><a href="javascript:void(0)" class="text-decoration-none">Edit</a></td>
+          <td class="text-right" (click)="deleteTransaction(data)"><a href="javascript:void(0)" class="text-decoration-none">Delete</a></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">Cumulative Cash Flow</td>
+          <td class="text-right">{{ transactionsCashFlowTotal | currency: 'GBP' }}</td>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
