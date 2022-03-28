@@ -10,6 +10,7 @@ import { AppPaths } from '../../shared/AppPaths';
 export class TransactionsService {
   // @ts-ignore
   public transactionSubject = new Subject<Transaction>();
+  private isEditing: boolean = false;
 
   constructor(private readonly httpClient: HttpClient) {}
 
@@ -31,5 +32,13 @@ export class TransactionsService {
 
   public deleteTransaction$(transaction: Transaction): Observable<{}> {
     return this.httpClient.delete(`${AppPaths.API}/${transaction.id}`);
+  }
+
+  public set isTransactionEditMode(value: boolean) {
+    this.isEditing = value;
+  }
+
+  public get isTransactionEditMode(): boolean {
+    return this.isEditing;
   }
 }

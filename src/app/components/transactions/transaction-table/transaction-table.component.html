@@ -30,8 +30,12 @@
           <td class="text-right">{{ data.cashflow }}</td>
 
           <td class="text-right"></td>
-          <td class="text-right" (click)="editTransaction(data)"><a href="javascript:void(0)" class="text-decoration-none">Edit</a></td>
-          <td class="text-right" (click)="deleteTransaction(data)"><a href="javascript:void(0)" class="text-decoration-none">Delete</a></td>
+          <div [ngClass]="{ disallowed: isEditMode }">
+            <td class="text-right" (click)="editTransaction(data)"><a href="javascript:void(0)" class="text-decoration-none">Edit</a></td>
+            <td class="text-right" (click)="deleteTransaction(data)">
+              <a href="javascript:void(0)" class="text-decoration-none">Delete</a>
+            </td>
+          </div>
         </tr>
       </tbody>
       <tfoot>

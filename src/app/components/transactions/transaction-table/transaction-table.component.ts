@@ -6,6 +6,7 @@ import { catchError, map, tap, throwError } from 'rxjs';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
+  styleUrls: ['./transaction-table.component.scss'],
 })
 export class TransactionTableComponent implements OnInit {
   public transactions: Transaction[] = [];
@@ -15,6 +16,10 @@ export class TransactionTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.hydrateTransactionsTable();
+  }
+
+  public get isEditMode() {
+    return this.transactionsService.isTransactionEditMode;
   }
 
   private hydrateTransactionsTable(): void {
@@ -36,6 +41,7 @@ export class TransactionTableComponent implements OnInit {
   }
 
   public editTransaction(transaction: Transaction): void {
+    this.transactionsService.isTransactionEditMode = true;
     this.transactionsService.transactionSubject.next(transaction);
   }
 

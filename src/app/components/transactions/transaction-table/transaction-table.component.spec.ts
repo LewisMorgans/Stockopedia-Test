@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { EMPTY, of, Subject } from 'rxjs';
 import { TransactionsService } from '../../../services/transactions/transactions.service';
 import { Transaction } from '../../../shared/Transaction';
+import { TransactionAdderComponent } from '../transaction-adder/transaction-adder.component';
 
 describe('[TransactionTableComponent] Testing Suite', () => {
   let component: TransactionTableComponent;

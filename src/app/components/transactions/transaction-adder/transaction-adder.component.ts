@@ -20,8 +20,11 @@ export class TransactionAdderComponent implements OnInit {
   }
 
   private updateFormValues(): void {
+
     this.transactionService.transactionSubject.subscribe(transaction => {
+      this.formData.reset()
       for (const [key, value] of Object.entries(transaction)) {
+        console.warn(key, value)
         this.formData.controls[key]?.setValue(value);
       }
     });
@@ -44,7 +47,10 @@ export class TransactionAdderComponent implements OnInit {
     this.transactionService
       .updateTransaction$(updatedTransaction)
       .pipe(catchError(err => throwError(err)))
-      .subscribe(_ => this.clearFormData());
+      .subscribe(_ => {
+        this.clearFormData()
+        this.transactionService.isTransactionEditMode = false
+      } );
   }
 
   public createNewTransaction(): void {
@@ -56,5 +62,6 @@ export class TransactionAdderComponent implements OnInit {
 
   public clearFormData(): void {
     this.formData.reset();
+    this.transactionService.isTransactionEditMode = false
   }
 }
